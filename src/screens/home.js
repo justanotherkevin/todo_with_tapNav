@@ -5,14 +5,13 @@ import {
   Text,
   View
 } from 'react-native';
+import Calendar from '../components/calendar';
 
 export default class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Home
-        </Text>
+        <Calendar/>
       </View>
     )
   }
