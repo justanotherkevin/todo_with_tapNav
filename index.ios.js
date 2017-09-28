@@ -26,6 +26,7 @@ import Home from './src/screens/home'
 // }
 
 class Profile extends Component {
+
   render() {
     return (
       <View style={styles.container}>
@@ -39,7 +40,8 @@ class Profile extends Component {
 
 export default class Todo extends Component {
   state= {
-  selectedTab: 'home'
+    selectedTab: 'home',
+    selectedDate: []
   };
   render() {
     return (
