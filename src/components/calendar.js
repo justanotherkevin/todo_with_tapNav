@@ -12,6 +12,7 @@ import moment from 'moment';
 const customDayHeadings = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const customMonthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May',
   'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -36,6 +37,7 @@ export default class CalendarScreen extends Component {
     super(props);
     this.state = {
       selectedDate: moment().format(),
+      eventsDate: [],
     };
   }
   render () {
@@ -43,8 +45,17 @@ export default class CalendarScreen extends Component {
       <View style={styles.container}>
         <Calendar
           ref="calendar"
-          eventDates={['2016-07-03', '2016-07-05', '2016-07-28', '2016-07-30']}
-          events={[{ date: '2017-09-04', hasEventCircle: { backgroundColor: 'powderblue' } }]}
+          showEventIndicators
+          eventDates={[
+            '2017-09-01',
+            '2017-09-02',
+            '2017-09-03',
+            '2017-09-04'
+          ]}
+          events={[
+            { date: '2017-09-04' },
+            { date: '2017-09-05' }
+          ]}
           scrollEnabled
           showControls
           dayHeadings={customDayHeadings}
@@ -52,18 +63,39 @@ export default class CalendarScreen extends Component {
           titleFormat={'MMMM YYYY'}
           prevButtonText={'Prev'}
           nextButtonText={'Next'}
-          // onDateSelect={(date) => this.setState({ selectedDate: date })}
+          onDateSelect={ (date) => this.setState({ selectedDate: date }) }
           // onDateLongPress={(date) => this.setState({ selectedDate: date })}
           // onTouchPrev={(e) => console.log('onTouchPrev: ', e)}
           // onTouchNext={(e) => console.log('onTouchNext: ', e)}
           // onSwipePrev={(e) => console.log('onSwipePrev: ', e)}
           // onSwipeNext={(e) => console.log('onSwipeNext', e)}
+          weekStart={0}
+          customStyle={customStyle}
         />
         <Text>Selected Date: edit for git hub {moment(this.state.selectedDate).format('MMMM DD YYYY')}</Text>
       </View>
     )
   }
 }
+const customStyle = {
+    controlButtonText: {
+     color: 'rgb(71, 183, 203)',
+    },
+    currentDayCircle: {
+      backgroundColor: 'orange',
+    },
+    currentDayText: {
+      color: 'pink',
+    },
+    eventIndicator: {
+      backgroundColor: 'blue',
+      width: 10,
+      height: 10,
+    },
+    hasEventCircle: {
+      backgroundColor: 'powderblue'
+    },
+ }
 const mapStateToProps = (state) => {
   return {
   }
