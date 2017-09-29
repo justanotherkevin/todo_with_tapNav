@@ -37,7 +37,12 @@ export default class CalendarScreen extends Component {
     super(props);
     this.state = {
       selectedDate: moment().format(),
-      eventsDate: [],
+      eventDates: [
+        '2017-09-01',
+        '2017-09-02',
+        '2017-09-03',
+        '2017-09-04'
+      ],
     };
   }
   render () {
@@ -46,16 +51,17 @@ export default class CalendarScreen extends Component {
         <Calendar
           ref="calendar"
           showEventIndicators
-          eventDates={[
-            '2017-09-01',
-            '2017-09-02',
-            '2017-09-03',
-            '2017-09-04'
-          ]}
-          events={[
-            { date: '2017-09-04' },
-            { date: '2017-09-05' }
-          ]}
+          eventDates={this.state.eventDates}
+          // eventDates= {[
+          //   '2017-09-01',
+          //   '2017-09-02',
+          //   '2017-09-03',
+          //   '2017-09-04'
+          // ]}
+          // events={[
+          //   { date: '2017-09-04' },
+          //   { date: '2017-09-05' }
+          // ]}
           scrollEnabled
           showControls
           dayHeadings={customDayHeadings}
@@ -87,11 +93,11 @@ const customStyle = {
     currentDayText: {
       color: 'pink',
     },
-    eventIndicator: {
-      backgroundColor: 'blue',
-      width: 10,
-      height: 10,
-    },
+    // eventIndicatorFiller: {
+    //   backgroundColor: 'blue',
+    //   width: 10,
+    //   height: 10,
+    // },
     hasEventCircle: {
       backgroundColor: 'powderblue'
     },
