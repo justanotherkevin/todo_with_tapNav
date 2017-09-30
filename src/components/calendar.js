@@ -3,7 +3,6 @@ import { ScrollView, Text, KeyboardAvoidingView, StyleSheet, View } from 'react-
 // import { connect } from 'react-redux';
 import Calendar from 'react-native-calendar';
 import moment from 'moment';
-import DoubleClick from 'react-native-double-click';
 
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -47,9 +46,6 @@ export default class CalendarScreen extends Component {
       ],
     };
     this.addToEventDates = this.addToEventDates.bind(this)
-  }
-  handleClick() {
-    Alert.alert('This is awesome \n Double tap succeed');
   }
   addToEventDates(date) {
       let selectedDate = moment(this.state.selectedDate).format('YYYY-MM-DD')
