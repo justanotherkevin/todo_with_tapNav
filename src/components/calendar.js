@@ -3,6 +3,8 @@ import { ScrollView, Text, KeyboardAvoidingView, StyleSheet, View } from 'react-
 // import { connect } from 'react-redux';
 import Calendar from 'react-native-calendar';
 import moment from 'moment';
+import DoubleClick from 'react-native-double-click';
+
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
@@ -44,6 +46,17 @@ export default class CalendarScreen extends Component {
         '2017-09-04'
       ],
     };
+    this.addToEventDates = this.addToEventDates.bind(this)
+  }
+  handleClick() {
+    Alert.alert('This is awesome \n Double tap succeed');
+  }
+  addToEventDates(date) {
+      let selectedDate = moment(this.state.selectedDate).format('YYYY-MM-DD')
+      let newDate = moment(date).format('YYYY-MM-DD')
+    if ( (newDate === selectedDate) && (!this.state.eventDates.includes(newDate)) ) {
+        this.state.eventDates.push(newDate)
+    }
   }
   render () {
     return (
@@ -59,7 +72,7 @@ export default class CalendarScreen extends Component {
           //   '2017-09-04'
           // ]}
           // events={[
-          //   { date: '2017-09-04' },
+          //   { date: '2017-09-07' },
           //   { date: '2017-09-05' }
           // ]}
           scrollEnabled
@@ -69,7 +82,11 @@ export default class CalendarScreen extends Component {
           titleFormat={'MMMM YYYY'}
           prevButtonText={'Prev'}
           nextButtonText={'Next'}
-          onDateSelect={ (date) => this.setState({ selectedDate: date }) }
+          onDateSelect={ (date) => {
+            this.setState({ selectedDate: date });
+            this.addToEventDates(date)
+            }
+          }
           // onDateLongPress={(date) => this.setState({ selectedDate: date })}
           // onTouchPrev={(e) => console.log('onTouchPrev: ', e)}
           // onTouchNext={(e) => console.log('onTouchNext: ', e)}
