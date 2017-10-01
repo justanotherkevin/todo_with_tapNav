@@ -46,12 +46,36 @@ export default class CalendarScreen extends Component {
       ],
     };
     this.addToEventDates = this.addToEventDates.bind(this)
+    this.removeFromEventDates = this.removeFromEventDates.bind(this)
+    this.isDoubleClick = this.isDoubleClick.bind(this)
+    this.toggleAddandRemoveDate = this.toggleAddandRemoveDate.bind(this)
+  }
+  isDoubleClick(stateDate, clickDate) {
+    return (stateDate === clickDate) ? true : false
   }
   addToEventDates(date) {
-      let selectedDate = moment(this.state.selectedDate).format('YYYY-MM-DD')
-      let newDate = moment(date).format('YYYY-MM-DD')
-    if ( (newDate === selectedDate) && (!this.state.eventDates.includes(newDate)) ) {
-        this.state.eventDates.push(newDate)
+    let currentEventDates = this.state.eventDates.slice();
+    currentEventDates.push(date);
+    this.setState({ eventDates: currentEventDates });
+  }
+  removeFromEventDates(array, date) {
+    let currentEventDates = this.state.eventDates.slice();
+    currentEventDates = currentEventDates.filter( function(n) {
+      return n!==date
+    });
+    this.setState({ eventDates: currentEventDates });
+  }
+  toggleAddandRemoveDate(date) {
+    let stateEventDates = this.state.eventDates.slice()
+    let stateSelectedDate = moment(this.state.selectedDate).format('YYYY-MM-DD')
+    let formatedDate = moment(date).format('YYYY-MM-DD')
+
+    if (this.isDoubleClick(stateSelectedDate, formatedDate)) {
+      if (stateEventDates.includes(formatedDate)) {
+        this.removeFromEventDates(stateEventDates, formatedDate)
+      } else {
+        this.addToEventDates(formatedDate)
+      }
     }
   }
   render () {
@@ -80,7 +104,7 @@ export default class CalendarScreen extends Component {
           nextButtonText={'Next'}
           onDateSelect={ (date) => {
             this.setState({ selectedDate: date });
-            this.addToEventDates(date)
+            this.toggleAddandRemoveDate(date)
             }
           }
           // onDateLongPress={(date) => this.setState({ selectedDate: date })}
