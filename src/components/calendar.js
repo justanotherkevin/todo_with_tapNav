@@ -128,11 +128,13 @@ const customStyle = {
     currentDayText: {
       color: 'pink',
     },
-    // eventIndicatorFiller: {
-    //   backgroundColor: 'blue',
-    //   width: 10,
-    //   height: 10,
-    // },
+    eventIndicator: {
+      backgroundColor: 'red',
+      width: 10,
+      height: 10,
+      borderRadius:10,
+    },
+
     hasEventCircle: {
       backgroundColor: 'powderblue'
     },
