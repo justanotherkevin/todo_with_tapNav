@@ -53,17 +53,15 @@ export default class CalendarScreen extends Component {
   isDoubleClick(stateDate, clickDate) {
     return (stateDate === clickDate) ? true : false
   }
-  addToEventDates(date) {
-    let currentEventDates = this.state.eventDates.slice();
-    currentEventDates.push(date);
-    this.setState({ eventDates: currentEventDates });
+  addToEventDates(array, date) {
+    array.push(date);
+    this.setState({ eventDates: array });
   }
   removeFromEventDates(array, date) {
-    let currentEventDates = this.state.eventDates.slice();
-    currentEventDates = currentEventDates.filter( function(n) {
+    let newArray = array.filter( function(n) {
       return n!==date
     });
-    this.setState({ eventDates: currentEventDates });
+    this.setState({ eventDates: newArray });
   }
   toggleAddandRemoveDate(date) {
     let stateEventDates = this.state.eventDates.slice()
@@ -74,7 +72,7 @@ export default class CalendarScreen extends Component {
       if (stateEventDates.includes(formatedDate)) {
         this.removeFromEventDates(stateEventDates, formatedDate)
       } else {
-        this.addToEventDates(formatedDate)
+        this.addToEventDates(stateEventDates, formatedDate)
       }
     }
   }
