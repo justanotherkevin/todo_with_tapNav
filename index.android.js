@@ -9,24 +9,76 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Dimensions
 } from 'react-native';
 
-export default class Todo extends Component {
+import TabNavigator from 'react-native-tab-navigator';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Home from './src/screens/home';
+
+// class Home extends Component {
+//   render() {
+//     return (
+//       <View style={styles.container}>
+//         <Text style={styles.welcome}>
+//           Home
+//         </Text>
+//       </View>
+//     )
+//   }
+// }
+
+class Profile extends Component {
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
+          Profile
         </Text>
       </View>
+    )
+  }
+}
+
+const deviceW = Dimensions.get('window').width
+
+const basePx = 375
+
+function px2dp(px) {
+  return px *  deviceW / basePx
+}
+
+export default class Todo extends Component {
+  state= {
+    selectedTab: 'home',
+    selectedDate: []
+  };
+  render() {
+    return (
+      <TabNavigator style={styles.container}>
+        <TabNavigator.Item
+          selected={this.state.selectedTab === 'home'}
+          title="Home"
+          selectedTitleStyle={{color: "#3496f0"}}
+          renderIcon={() => <Icon name="home" size={px2dp(22)} color="#666"/>}
+          renderSelectedIcon={() => <Icon name="home" size={px2dp(22)} color="#3496f0"/>}
+          badgeText="1"
+          onPress={() => this.setState({selectedTab: 'home'})}>
+          <Home/>
+        </TabNavigator.Item>
+
+        <TabNavigator.Item
+          selected={this.state.selectedTab === 'profile'}
+          title="Profile"
+          selectedTitleStyle={{color: "#3496f0"}}
+          renderIcon={() => <Icon name="user" size={px2dp(22)} color="#666"/>}
+          renderSelectedIcon={() => <Icon name="user" size={px2dp(22)} color="#3496f0"/>}
+          onPress={() => this.setState({selectedTab: 'profile'})}>
+          <Profile/>
+        </TabNavigator.Item>
+      </TabNavigator>
     );
   }
 }
