@@ -15,32 +15,10 @@ import {
 
 import TabNavigator from 'react-native-tab-navigator';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+// Components
 import Home from './src/screens/home';
-
-// class Home extends Component {
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <Text style={styles.welcome}>
-//           Home
-//         </Text>
-//       </View>
-//     )
-//   }
-// }
-
-class Profile extends Component {
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Profile
-        </Text>
-      </View>
-    )
-  }
-}
+import Profile from './src/screens/profile';
 
 const deviceW = Dimensions.get('window').width
 
